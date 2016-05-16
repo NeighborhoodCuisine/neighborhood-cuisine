@@ -1,0 +1,1 @@
+curl -u "acc_0081804035bb424:ff5a9b6a319e10cbba3ac715c72ce1d5" http://api.imagga.com/v1/tagging?url=$1
