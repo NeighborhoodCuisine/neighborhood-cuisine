@@ -58,8 +58,9 @@ coverage.xml
 # Django stuff:
 *.log
 
-# Sphinx documentation
-docs/_build/
+# documentation
+# run ./scripts/build-apidocs.sh yourself
+docs/
 
 # PyBuilder
 target/
