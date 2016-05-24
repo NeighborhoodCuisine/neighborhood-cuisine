@@ -69,4 +69,4 @@ target/
 .idea/
 
 # Credentials
-*/credentials.py
+##  */credentials.py
