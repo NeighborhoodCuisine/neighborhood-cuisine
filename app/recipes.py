@@ -12,7 +12,7 @@ class RecipeProvider:
     recipe_list = base_url + '/recipes/findByIngredients'
 
     @classmethod
-    def params(cls, ingredients):
+    def ranking_params(cls, ingredients):
         params = {
             'ingredients': ','.join(ingredients),
             'limitLicense': False,
@@ -22,28 +22,38 @@ class RecipeProvider:
         return params
 
     @classmethod
-    def best_recipe(cls, ingredients):
-        params = cls.params(ingredients)
+    def best_n_recipes(cls, ingredients, n=100):
+        params = cls.ranking_params(ingredients)
         recipes = requests.get(cls.base_url + '/recipes/findByIngredients',
                                headers=cls.headers, params=params).json()
         if not recipes:
             return None
         recipes.sort(key=lambda r: r.get('likes'), reverse=True)
-        return recipes[0]
+        return recipes[:100]
 
     @classmethod
-    def recipe_info(cls, _id):
+    def full_recipe(cls, _id):
+        summary = cls.recipe_summary(_id)
+        information = cls.recipe_information(_id)
+        summary.update(information)
+        return summary
+
+    @classmethod
+    def recipe_information(cls, _id):
+        required = ['summary']
         params = {
             'includeNutrition': False
         }
-        summary = cls.recipe_summary(_id)
-        return requests.get(cls.base_url + '/recipes/{}/information'.format(_id),
-                            headers=cls.headers, params=params).json()
+        res = requests.get(cls.base_url + '/recipes/{}/information'.format(_id),
+                           readers=cls.headers, params=params).json()
+        return {key: res[key] for key in required}
 
     @classmethod
     def recipe_summary(cls, _id):
+        required = ['id', 'extendedIngredients', 'title', 'image']
         params = {
             'includeNutrition': False
         }
-        return requests.get(cls.base_url + '/recipes/{}/summary'.format(_id),
-                            headers=cls.headers, params=params).json()
+        res = requests.get(cls.base_url + '/recipes/{}/summary'.format(_id),
+                           headers=cls.headers, params=params).json()
+        return {key: res[key] for key in required}
