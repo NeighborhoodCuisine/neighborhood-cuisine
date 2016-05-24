@@ -1,4 +1,4 @@
-from flask_restful import Resource
+from flask_restful import Resource, abort
 from flask import request
 from copy import deepcopy
 
@@ -9,6 +9,36 @@ SRC_FACEBOOK = 'fb'
 SRC_SESSION = 'ses'
 
 active_users = ActiveUsers()
+
+
+class Recipes(Resource):
+    @staticmethod
+    def post():
+        """
+        @api {get} /recipes-from-ingredients
+        @apiVersion 0.1.0
+        @apiName RecipesFromIngredients
+        @apiGroup Recipe
+        @apiPermission anonymous
+
+        @apiDescription Retrieve a list of recipes which can be cooked
+                        using as many of the given ingredients as possible
+
+        @apiParam {String[]}    ingredients                 List of ingredient names which shall be
+                                                            used in the recipe.
+
+        @apiSuccess {Object[]}  recipes                     List of possible recipes
+        @apiSuccess {String[]}  recipes.ingredients         List of ingredients of the recipe
+        @apiSuccess {String}    recipes.image_url           Url of an image of the recipe
+        @apiSuccess {String[]}  recipes.missing_ingredients List of ingredients which were
+                                                            not included in the search
+        @apiSuccess {String}    recipes.recipe_url Original Url of source of the recipe
+        """
+        data = request.get_json()
+        if 'ingredients' not in data:
+            abort(404, message='No ingredients specified')
+
+        return data
 
 
 class InitUser(Resource):

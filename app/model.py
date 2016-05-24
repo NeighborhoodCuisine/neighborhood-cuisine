@@ -11,7 +11,6 @@ MAX_GUESTS = 8
 
 
 class ActiveUsers:
-
     def __init__(self):
         self.users = []
 

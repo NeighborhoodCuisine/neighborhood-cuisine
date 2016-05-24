@@ -61,6 +61,7 @@ coverage.xml
 # documentation
 # run ./scripts/build-apidocs.sh yourself
 docs/
+doc/
 
 # PyBuilder
 target/
@@ -69,4 +70,4 @@ target/
 .idea/
 
 # Credentials
-##  */credentials.py
+*/credentials.py
