@@ -59,14 +59,16 @@ class RecipeProvider:
         @apiGroup Recipe
         @apiPermission anonymous
 
-        @apiDescription Retrieve a list of recipes which can be cooked using as many of the given ingredients as possible
+        @apiDescription Retrieve a list of recipes which can be cooked
+                        using as many of the given ingredients as possible
 
         @apiParam {String[]} ingredients List of ingredient names which shall be used in the recipe.
 
         @apiSuccess {Object[]} recipes                     List of possible recipes
         @apiSuccess {String[]} recipes.ingredients         List of ingredients of the recipe
         @apiSuccess {String}   recipes.image_url           Url of an image of the recipe
-        @apiSuccess {String[]} recipes.missing_ingredients List of ingredients which were not included in the search
+        @apiSuccess {String[]} recipes.missing_ingredients List of ingredients which were
+                                                           not included in the search
         @apiSuccess {String}   recipes.recipe_url Original Url of source of the recipe
         """
         pass
