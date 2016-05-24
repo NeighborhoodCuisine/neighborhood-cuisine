@@ -40,7 +40,7 @@ class Recipes(Resource):
         if 'ingredients' not in req:
             abort(404, message='No ingredients specified')
 
-        return RecipeProvider.best_n_recipes(req['ingredients'])
+        return RecipeProvider.best_n_recipes(req['ingredients'], n=5)
 
 
 class RecipeCard(Resource):
