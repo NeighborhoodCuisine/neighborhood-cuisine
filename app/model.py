@@ -11,7 +11,6 @@ MAX_GUESTS = 8
 
 
 class ActiveUsers:
-
     def __init__(self):
         self.users = []
 
@@ -98,7 +97,7 @@ class ActiveUsers:
 
     @classmethod
     def _enrich_recipe(cls, recipe):
-        info = RecipeProvider.recipe_info(recipe['id'])
+        info = RecipeProvider.recipe_information(recipe['id'])
         summary = RecipeProvider.recipe_summary(recipe['id'])
         recipe.update(info)
         recipe.update(summary)
