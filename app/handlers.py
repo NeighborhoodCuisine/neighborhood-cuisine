@@ -16,7 +16,7 @@ class Recipes(Resource):
     @staticmethod
     def post():
         """
-        @api {get} /recipes-from-ingredients
+        @api {post} /recipes-from-ingredients
         @apiVersion 0.1.0
         @apiName RecipesFromIngredients
         @apiGroup Recipe
